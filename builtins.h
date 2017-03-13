@@ -59,6 +59,7 @@ int andysh_cd(char ** args){
 			}
 			i++;
 		}
+		printf("Unable to find $HOME");
 	}
 }
 int andysh_dir(char ** args){
