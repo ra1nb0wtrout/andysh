@@ -44,17 +44,17 @@ void andysh_loop(){
 	while(1){
 		char * cwd = getcwd(NULL, cwdsize);
 		//Request Input
-		printf("\n\%s\n8=>~", cwd);
+		printf("\n%s\n8=>~", cwd);
 		free(cwd);
 		char * input = getInput();
 
 		//Tokenize Input
 		char ** iTokens = andysh_tokenize(input);
-		free(input);
 
 		//if it's not an empty command, do it
 		(iTokens[0] != NULL) ? 
 			andysh_do(iTokens) : printf("No Operation\n");
+		free(input);
 		free(iTokens);
 
 	}
@@ -98,15 +98,14 @@ void andysh_do(char ** tokens){
 }
 
 char ** andysh_tokenize(char * msg){
-
 	int position = 0;
 	int bufferSize = TOKENBUFFERSIZE;
 
 	char ** tokens = malloc(bufferSize * sizeof(char *));
 	char * token = strtok(msg, TOKENDELIM);
-
 	while(token != NULL){
 		tokens[position] = token;
+
 		position++;
 		if(position >= TOKENBUFFERSIZE){
 			bufferSize += TOKENBUFFERSIZE;

@@ -45,6 +45,21 @@ int andysh_clear(char ** args){
 }
 
 int andysh_cd(char ** args){
+	if(args[1] != NULL){ 
+		chdir(args[1]);
+	}
+	else{
+		int i = 0;
+		while( environ[i] != NULL){
+			printf("Not NULL\n");
+			if(!strncmp("HOME=",environ[i],5)){
+				char * path = strchr(environ[i],'/');
+				chdir(path);
+				break;
+			}
+			i++;
+		}
+	}
 }
 int andysh_dir(char ** args){
 	system("ls -alh");
@@ -54,6 +69,6 @@ int andysh_help(char ** args){
 int andysh_exit(char ** args){
 	free(args);
 	exit(0);
-	}
+}
 
 #endif
