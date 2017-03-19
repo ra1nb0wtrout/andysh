@@ -44,7 +44,7 @@ void andysh_loop(){
 	while(1){
 		char * cwd = getcwd(NULL, cwdsize);
 		//Request Input
-		printf("\n%s\n8=>~", cwd);
+		printf("\n%s\n>|>", cwd);
 		free(cwd);
 		char * input = getInput();
 

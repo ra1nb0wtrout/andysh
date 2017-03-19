@@ -51,11 +51,10 @@ int andysh_cd(char ** args){
 	else{
 		int i = 0;
 		while( environ[i] != NULL){
-			printf("Not NULL\n");
 			if(!strncmp("HOME=",environ[i],5)){
 				char * path = strchr(environ[i],'/');
 				chdir(path);
-				break;
+				return;
 			}
 			i++;
 		}
@@ -63,7 +62,14 @@ int andysh_cd(char ** args){
 	}
 }
 int andysh_dir(char ** args){
-	system("ls -alh");
+	if(args[1] == NULL) {system("ls -alh");}
+	else{
+		char *s = malloc(sizeof(char) * strlen(args[1]) + sizeof(char) *
+		10);
+		strcpy(s, "ls -alh ");
+		strcat(s,args[1]);
+		system(s);
+	}
 }
 int andysh_help(char ** args){
 }
